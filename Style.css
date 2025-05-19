@@ -1,0 +1,23 @@
+body {
+    background-color:rgb(118, 203, 203);
+    font-family:'Times New Roman', Times, serif;
+
+}
+.grid-container{
+    display:grid;
+    grid-template-columns: auto auto auto;
+}
+.grid-item{
+    padding: 10px;
+    border:solid 5p;
+}
+img {
+    height:400px;   
+} 
+-grid-container-to{
+    display:grid;
+    grid-template-columns:30% 70%;
+}
+h1 {
+    text-align: center;
+}

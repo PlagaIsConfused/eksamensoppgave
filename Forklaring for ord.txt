@@ -1,0 +1,15 @@
+Relasjon:
+
+
+
+Primærnøkkel:
+
+
+
+
+Fremmednøkkel:
+
+
+
+
+attributt:
