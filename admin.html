@@ -1,45 +1,125 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Admin</title>
-    <link rel="stylesheet" href="Style.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="Style.css" />
     <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-    }
-    .topnav {
-      background-color: #333;
-      overflow: hidden;
-    }
-    .topnav a {
-      float: left;
-      display: block;
-      color: #f2f2f2;
-      text-align: center;
-      padding: 14px 20px;
-      text-decoration: none;
-      font-size: 17px;
-    }
-    .topnav a:hover {
-      background-color: #ddd;
-      color: black;
-    }
-  </style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .topnav {
+            background-color: #333;
+            overflow: hidden;
+        }
+        .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .topnav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        table {
+            width: 90%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #999;
+            padding: 8px 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
 </head>
 <body>
-  <div class="topnav">
-    <a href="index.html">Home</a>
-    <a href="cars.html">Utvalg og booking</a>
-    <a href="#about">Om oss</a>
-    <a href="admin.html">Admin</a>
+    <div class="topnav">
+        <a href="index.html">Home</a>
+        <a href="cars.html">Utvalg og booking</a>
+        <a href="#about">Om oss</a>
+        <a href="admin.html">Admin</a>
     </div>
     <h1 style="text-align:center; margin-top: 20px;">Administrasjon</h1>
 
+    <table id="ordersTable">
+        <thead>
+            <tr>
+                <th>Car Name</th>
+                <th>Model</th>
+                <th>Buyer Name</th>
+                <th>Contact Information</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data rows will be inserted here by JavaScript -->
+        </tbody>
+    </table>
+
+    <script>
+        // JSON data converted from tabeller.sql
+        const cars = [
+            { id: 1, navn: 'Mazda Miata 1990', merke: 'Mazda', modell: 'Miata', lenke_til_bilde: 'https://hips.hearstapps.com/hmg-prod/images/1990-mazda-mx-5-miata-bat-105-664e2c563ceff.jpg?crop=1.00xw:0.845xh;0,0.0983xh&resize=640:*', kilometerstand: 145000 },
+            { id: 2, navn: 'Honda Civic', merke: 'Honda', modell: 'Civic', lenke_til_bilde: 'https://example.com/honda_civic.jpg', kilometerstand: 20000 },
+            { id: 3, navn: 'Ford Focus', merke: 'Ford', modell: 'Focus', lenke_til_bilde: 'https://example.com/ford_focus.jpg', kilometerstand: 25000 }
+        ];
+
+        const customers = [
+            { id: 1, navn: 'Anna Nordmann', epost: 'anna@example.com' },
+            { id: 2, navn: 'Birger Nordmann', epost: 'birger@example.com' },
+            { id: 3, navn: 'Christoffer Hansen', epost: 'christoffer@example.com' }
+        ];
+
+        const orders = [
+            { id: 1, bil_id: 1, kunde_id: 1 },
+            { id: 2, bil_id: 2, kunde_id: 2 },
+            { id: 3, bil_id: 3, kunde_id: 3 }
+        ];
+
+        // Function to join data and render table rows
+        function renderOrdersTable() {
+            const tbody = document.querySelector('#ordersTable tbody');
+            tbody.innerHTML = '';
+
+            orders.forEach(order => {
+                const car = cars.find(c => c.id === order.bil_id);
+                const customer = customers.find(cu => cu.id === order.kunde_id);
+
+                if (car && customer) {
+                    const row = document.createElement('tr');
+
+                    const carNameCell = document.createElement('td');
+                    carNameCell.textContent = car.navn;
+                    row.appendChild(carNameCell);
+
+                    const modelCell = document.createElement('td');
+                    modelCell.textContent = car.modell;
+                    row.appendChild(modelCell);
+
+                    const buyerNameCell = document.createElement('td');
+                    buyerNameCell.textContent = customer.navn;
+                    row.appendChild(buyerNameCell);
+
+                    const contactCell = document.createElement('td');
+                    contactCell.textContent = customer.epost;
+                    row.appendChild(contactCell);
+
+                    tbody.appendChild(row);
+                }
+            });
+        }
+
+        // Render the table on page load
+        window.onload = renderOrdersTable;
+    </script>
 </body>
 </html>
