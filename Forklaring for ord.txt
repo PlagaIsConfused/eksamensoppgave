@@ -1,15 +1,31 @@
 Relasjon:
+Relasjon er koblingen mellom to forskjellige tabeller,
+som viser at dem har noe til felles, eller relatert til hverandre.
 
 
 
 Primærnøkkel:
+Hver "entry" i en tabell har en primærnøkkel, som gir dem en spesifik id.
 
 
 
 
 Fremmednøkkel:
-
+En form for nøkkel på en tabell som refererer til en primærnøkkel på en annen tabell.
+Dette kan også bli sett på som en relasjon
 
 
 
 attributt:
+Attributt er feltene utenom primærnøkkel, og holder informasjon om de forskjellige "entries" i en database.
+Blant annet navn, tlf. nummer, mail, alder, modell (på bil), osv.
+
+
+Forklaring av kode:
+
+            select bil.*, kunde.* from Bestilling
+            join Bil on Bil.id = Bestilling.bil_id
+            join Kunde on Kunde.id = Bestilling.kunde_id;
+                        
+            Koden blir utnyttet for å sette sammen kunde og bil, så lenge bil.id, bestilling.bil_id samsvarer hverandre.
+            samt det samme for Kunde.id og Bestilling.kunde_id
